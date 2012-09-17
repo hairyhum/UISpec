@@ -450,11 +450,26 @@
     return [UIQuery withViews:views className:className];
 }
 
+- (UIQuery *) tapForDuration: (NSString *) duration
+{
+    // forward call to touch performer with our target views
+    [self.touchPerformer tapOnViewsForDuration: [self targetViews] [duration doubleValue]];    
+    return [UIQuery withViews:views className:className];
+}
+
 - (UIQuery *) tapAtPoint: (NSString *) point
 {
     CGPoint tapPoint = CGPointFromString(point);
     // forward call to touch performer
     [self.touchPerformer tapAtPoint: tapPoint];
+    return [UIQuery withViews:views className:className];
+}
+
+- (UIQuery *) tapAtPointForDuration: (NSString *) point duration: (NSString *) duration
+{
+    CGPoint tapPoint = CGPointFromString(point);
+    // forward call to touch performer
+    [self.touchPerformer tapAtPointForDuration: tapPoint duration: [duration doubleValue]];
     return [UIQuery withViews:views className:className];
 }
 

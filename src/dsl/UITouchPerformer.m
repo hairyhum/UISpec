@@ -31,6 +31,10 @@
 #pragma mark - Tapping
 - (void) tapOnViews: (NSArray*) views
 {
+    [self tapOnViewsForDuration: views duration: TAP_DELAY];
+}
+- (void) tapOnViewsForDuration: (NSArray*) views duration: (double) duration
+{
     for(UIView *targetView in views)
     {
         // create a touch in the center of the view
@@ -48,7 +52,7 @@
         // dispatch phase down event
         [[UIApplication sharedApplication] sendEvent: event];
         
-        [self wait: TAP_DELAY];
+        [self wait: duration];
         
         // dispatch phase up
         [touch setPhase:UITouchPhaseEnded];
@@ -61,6 +65,10 @@
 }
 
 - (void) tapAtPoint: (CGPoint) point
+{
+    [self tapAtPointForDuration: point duration: TAP_DELAY]
+}
+- (void) tapAtPointForDuration: (CGPoint) point duration: (double) duration
 {
     NSLog(@"Tapping at: %@", NSStringFromCGPoint(point));
 
@@ -79,7 +87,7 @@
     // dispatch phase down event
     [[UIApplication sharedApplication] sendEvent: event];
     
-    [self wait: TAP_DELAY];
+    [self wait: duration];
     
     // dispatch phase up
     [touch setPhase:UITouchPhaseEnded];
